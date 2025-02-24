@@ -19,6 +19,36 @@ OR germany_cars.offerType IS NULL OR germany_cars.offerType = ''
 OR germany_cars.price IS NULL OR germany_cars.price = ''
 OR GERM
 
+-- DROPPING ROWS WITH NULL SPACES 
+DELETE FROM germany_cars
+WHERE germany_cars.mileage IS NULL OR germany_cars.mileage = ''
+OR germany_cars.make IS NULL OR germany_cars.make = ''
+OR germany_cars.model IS NULL OR germany_cars.model = ''
+OR germany_cars.fuel IS NULL OR germany_cars.fuel = ''
+OR germany_cars.gear IS NULL OR germany_cars.gear = ''
+OR germany_cars.offerType IS NULL OR germany_cars.offerType = ''
+OR germany_cars.price IS NULL OR germany_cars.price = ''
+OR germany_cars.hp IS NULL OR germany_cars.hp = ''
+OR germany_cars.year IS NULL OR germany_cars.year = '';
+
+-- CHECKING FOR DUPLICATE ROWS 
+SELECT 
+    germany_cars.mileage,
+    germany_cars.make,
+    germany_cars.model,
+    germany_cars.fuel,
+    germany_cars.gear,
+    germany_cars.offerType,
+    germany_cars.price,
+    germany_cars.hp,
+    germany_cars.year,
+    COUNT(*) AS Duplicates
+FROM
+    germany_cars
+GROUP BY germany_cars.mileage , germany_cars.make , germany_cars.model , germany_cars.fuel ,
+ germany_cars.gear , germany_cars.offerType , germany_cars.price , germany_cars.hp , germany_cars.year
+HAVING COUNT(*) > 1;
+
 
 -- TOTAL SALES 
 SELECT SUM(germany_cars.price) AS 'TOTAL SALES' FROM germany_cars;
@@ -64,20 +94,6 @@ SELECT germany_cars.gear, COUNT(germany_cars.gear) AS 'COUNT'
 FROM germany_cars
 GROUP BY germany_cars.gear
 ORDER BY COUNT(germany_cars.gear) DESC;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
